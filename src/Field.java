@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Field {
-	private static final String alphabet = "abcdefghij";
+	private static final String alphabet = "ABCDEFGHIJ";
 	private static final int BOARD_SIZE = 10;
 	private static final int SHIP_AMOUNT = 5;
 	
@@ -88,7 +88,7 @@ public class Field {
 		if (s != null)
 			s.shoot();
 		else
-			System.out.println("Null exception");
+			System.out.println("Wrong coordinate!");
 	}
 	
 	/**

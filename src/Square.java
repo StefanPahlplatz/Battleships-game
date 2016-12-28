@@ -13,21 +13,21 @@ public class Square {
 		wasShot = true;
 	}
 	
+	/**
+	 * Gets the right letter that should be displayed on the board
+	 * @return Depending on the state of the square:
+	 *		V: Ship, 	it sank
+	 *		~: No ship, shot
+	 *		*: Ship,	shot
+	 *		.: No ship,	nothing happened
+	 *		otherwise: the letter of the ship at the position
+	 */
 	public char getLetter() {
-		// The ship sank
-		if (ship != null && ship.isSunk())
-			return 'V';
-		// No ship, shot missed
-		else if (ship == null && wasShot)
-			return '~';
-		// The ship was hit
-		else if (ship != null && wasShot)
-			return '*';
-		else if (ship != null && !wasShot)
-			return ship.getLetter();
-		// Default
-		else
-			return '.';
+		if (ship != null && ship.isSunk()) return 'V';
+		else if (ship == null && wasShot) return '~';
+		else if (ship != null && wasShot) return '*';
+		else if (ship != null && !wasShot) return ship.getLetter();
+		else return '.';
 	}
 	
 	public String getCoord() {
