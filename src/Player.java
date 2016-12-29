@@ -17,7 +17,7 @@ public class Player {
 
 	/**
 	 * Returns the name of the player
-	 * @return String
+	 * @return player name
 	 */
 	public String getName() {
 		return name;
@@ -25,7 +25,7 @@ public class Player {
 
 	/**
 	 * Returns the player id
-	 * @return integer
+	 * @return player id
 	 */
 	public int getPlayerId() {
 		return playerId;
@@ -33,9 +33,16 @@ public class Player {
 	
 	/**
 	 * Returns the field the player is playing on
-	 * @return Field
+	 * @return the playing field of the player
 	 */
 	public Field getField() {
 		return field;
+	}
+	
+	/**
+	 * Resets the player's field.
+	 */
+	public void reset() {
+		field = new Field();
 	}
 }

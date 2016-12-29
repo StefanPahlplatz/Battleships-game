@@ -54,7 +54,7 @@ public class Field {
 	
 	/**
 	 * Shoots at the specified location
-	 * @param atPosition String e.g. A3
+	 * @param atPosition the position to shoot, e.g. A3
 	 * @return False if the square was already hit, True if the square has not been hit yet
 	 */
 	public boolean fire(String atPosition) {
@@ -84,7 +84,7 @@ public class Field {
 	
 	/**
 	 * Returns whether all ships are sunk
-	 * @return boolean
+	 * @return true if all ships are sunk, otherwise false
 	 */
 	public boolean areAllShipsSunk() {
 		return countShipsSunk >= SHIP_AMOUNT;
@@ -92,8 +92,8 @@ public class Field {
 	
 	/**
 	 * Returns the Square at the passed position
-	 * @param coord String e.g. 6a
-	 * @return Square object
+	 * @param coordinate, e.g. A5
+	 * @return the square corresponding to the given coordinate
 	 */
 	private Square getCoord(String coord) {
 		for (int i = 0; i < BOARD_SIZE; i++) {
@@ -158,7 +158,7 @@ public class Field {
 	 * Finds the right letter that should be displayed on the board, 
 	 * depending on which ship it is, if it has been hit and if the ship has sunk
 	 * @param c character from Square.getLetter()
-	 * @return char
+	 * @return the right letter to be displayed
 	 */
 	private char findRightLetter(char c) {
 		switch (c) {
@@ -188,6 +188,7 @@ public class Field {
 			break;
 		case '8':
 			c = ships.get(3).isSunk() ? 'V' : '*';
+			break;
 		case '9':
 			c = ships.get(4).isSunk() ? 'V' : '*';
 		default:

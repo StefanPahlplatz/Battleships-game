@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SeaBattle {
-	public static final boolean	CHEAT = false;
+	public static final boolean	CHEAT = true;
 	private static final String VALID_COORD = "^[A-J]([1-9]$|10$)";
 	
 	private ArrayList<Player> players;
 	private int turn;
+	private int startTurn;
 	private Scanner sc;
 	
 	/**
@@ -15,6 +16,7 @@ public class SeaBattle {
 	public SeaBattle() {
 		players = new ArrayList<>();
 		turn = 0;
+		startTurn = 1;
 		sc = new Scanner(System.in);
 	}
 	
@@ -22,34 +24,45 @@ public class SeaBattle {
 	 * Starts the game
 	 */
 	public void play() {
-		while (!players.get(turn).getField().areAllShipsSunk()) {
-			// Who's turn is it
-			System.out.println(String.format("\n*** %s's turn ***", players.get(turn).getName()));
+		boolean playing = true;
+		while (playing) {
+			// Change turns for each game
+			if (players.size() > 1)
+				startTurn ^= 1;
+			turn = startTurn;
 			
-			// Draw the field
-			players.get(turn).getField().print();
-			
-			// Ask for the input
-			String shootInput;
-			do {
+			while (!players.get(turn).getField().areAllShipsSunk()) {
+				// Print whos turn is it
+				System.out.println(String.format("\n*** %s's turn ***", players.get(turn).getName()));
+				
+				String shootInput;
 				do {
-					System.out.print(String.format("%s, enter the location to shoot: ", players.get(turn).getName()));
-		 			shootInput = Input.getString(sc);
-				} while (!shootInput.matches(VALID_COORD));
-			} while (!players.get(turn).getField().fire(shootInput) && !players.get(turn).getField().areAllShipsSunk());
+					// Draw the field
+					players.get(turn).getField().print();
+	
+					// Ask for the coordinate to shoot
+					do {
+						System.out.print(String.format("%s, enter the location to shoot: ", players.get(turn).getName()));
+			 			shootInput = Input.getString(sc);
+					} while (!shootInput.matches(VALID_COORD));
+				} while (!players.get(turn).getField().fire(shootInput) && !players.get(turn).getField().areAllShipsSunk());
+				
+				// Next turn
+				if (players.size() > 1 && !players.get(turn).getField().areAllShipsSunk())
+					turn ^= 1;
+			}
 			
-			// Next turn
-			if (players.size() > 1 && !players.get(turn).getField().areAllShipsSunk())
-				turn ^= 1;
+			// A player won
+			System.out.print("You sank all ships " + players.get(turn).getName() + 
+					"!\nDo you want to play again? (yes/no): ");
+			playing = Input.getYesNo(sc);
 		}
-		
-		// Player with current turn won
-		System.out.println("ALL SHIPS SUNK - " + players.get(turn).getName() + " WON!");
+		System.out.println("Thank you for playing!");
 	}
 	
 	/**
 	 * Adds a player to the game
-	 * @param player object
+	 * @param player to add
 	 */
 	public void addPlayer(Player player) {
 		players.add(player);

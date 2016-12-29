@@ -10,7 +10,7 @@ public class Square {
 	
 	/**
 	 * Default constructor
-	 * @param coords String e.g. F8
+	 * @param coordinates, e.g. F8
 	 */
 	public Square(String coords) {
 		this.coords = coords;
@@ -19,7 +19,7 @@ public class Square {
 	
 	/**
 	 * Shoots the square
-	 * @return Enum State based on the condition of the square after being shot
+	 * @return an enum Square.State based on the condition of the square after being shot
 	 */
 	public State shoot() {
 		if (!wasShot && hasShip()) {
@@ -33,17 +33,11 @@ public class Square {
 		} else {
 			return null;
 		}
-		
 	}
 	
 	/**
-	 * Gets the right letter that should be displayed on the board
-	 * @return Depending on the state of the square:
-	 *		V: Ship, 	it sank
-	 *		~: No ship, shot
-	 *		*: Ship,	shot
-	 *		.: No ship,	nothing happened
-	 *		otherwise: the letter of the ship at the position
+	 * Returns a character that should be parsed by Field.findRightLetter to get the right character
+	 * @return a character depending on the state of the square
 	 */
 	public char getLetter() {
 		if (!hasShip() && wasShot) return '~';
@@ -54,14 +48,14 @@ public class Square {
 	
 	/**
 	 * Returns the full name of the ship e.g. "Patrol Boat"
-	 * @return String
+	 * @return the name of the ship on the square
 	 */
 	public String getShipName() {
 		return ship.getFullName();
 	}
 	
 	/**
-	 * Returns the integer value of the ship enum
+	 * Returns the integer value of the ship type
 	 * @return integer ranging from 0 to 4, if there is no ship return -1
 	 */
 	public int getShipTypeAsInt() {
@@ -95,7 +89,7 @@ public class Square {
 	
 	/**
 	 * Returns whether the square has a ship on it or not
-	 * @return boolean
+	 * @return true if it has a ship, otherwise false
 	 */
 	public boolean hasShip() {
 		return ship != null;
@@ -103,7 +97,7 @@ public class Square {
 	
 	/**
 	 * Sets the ship of the current square
-	 * @param ship Ship
+	 * @param ship Ship object
 	 */
 	public void setShip(Ship ship) {
 		this.ship = ship;

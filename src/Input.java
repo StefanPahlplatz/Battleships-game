@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Input {
 	/**
-	 * Asks the user to input a string
+	 * Gets a string from the user
 	 * @param sc Scanner
-	 * @return user input as String
+	 * @return user input
 	 */
 	public static String getString(Scanner sc) {
 		String value = "";
@@ -14,11 +14,24 @@ public class Input {
 	}
 	
 	/**
-	 * Asks the user to input an integer within the specified range
+	 * Gets a string from the user which is either yes or no
+	 * @param sc Scanner
+	 * @return yes if the user entered yes, false if the user entered no
+	 */
+	public static boolean getYesNo(Scanner sc) {
+		String value;
+		do {
+			value = Input.getString(sc);
+		} while (!value.equals("yes") && !value.equals("no"));
+		return value.equals("yes");
+	}
+	
+	/**
+	 * Gets an integer from the user within the specified range
 	 * @param sc Scanner
 	 * @param min value to be accepted
 	 * @param max value to be accepted
-	 * @return integer
+	 * @return user input
 	 */
 	public static int getInt(Scanner sc, int min, int max) {
 		int value;
@@ -29,9 +42,9 @@ public class Input {
 	}
 	
 	/**
-	 * Asks the user to input an integer
+	 * Gets an integer from the user
 	 * @param sc Scanner
-	 * @return integer
+	 * @return user input
 	 */
 	public static int getInt(Scanner sc) {
 	    while (!sc.hasNextInt()) {
