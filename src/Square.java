@@ -47,7 +47,7 @@ public class Square {
 	 */
 	public char getLetter() {
 		if (!hasShip() && wasShot) return '~';
-		else if (hasShip() && wasShot) return '*';
+		else if (hasShip() && wasShot) return Character.forDigit(getShipTypeAsInt() + 5, 10);
 		else if (hasShip() && !wasShot) return Character.forDigit(getShipTypeAsInt(), 10);
 		else return '.';
 	}

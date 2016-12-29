@@ -38,20 +38,7 @@ public class Field {
 		for (int i = BOARD_SIZE - 1; i >= 0; i--) {
 			String line = String.format("%2s"  + " ", Integer.toString(i + 1)); 
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				
-				
-				
-				char c = board[i][j].getLetter();
-				if (c == '0')
-					c = ships.get(0).getLetter();
-				else if (c == '1')
-					c = ships.get(1).getLetter();
-				else if (c == '2')
-					c = ships.get(2).getLetter();
-				else if (c == '3')
-					c = ships.get(3).getLetter();
-				else if (c == '4')
-					c = ships.get(4).getLetter();
+				char c = findRightLetter(board[i][j].getLetter());
 				line += c + " ";
 			}
 			System.out.println(line);
@@ -165,5 +152,47 @@ public class Field {
 				}
 			} while (!placedShip);
 		}
+	}
+
+	/**
+	 * Finds the right letter that should be displayed on the board, 
+	 * depending on which ship it is, if it has been hit and if the ship has sunk
+	 * @param c character from Square.getLetter()
+	 * @return char
+	 */
+	private char findRightLetter(char c) {
+		switch (c) {
+		case '0':
+			c = ships.get(0).getLetter();
+			break;
+		case '1':
+			c = ships.get(1).getLetter();
+			break;
+		case '2':
+			c = ships.get(2).getLetter();
+			break;
+		case '3':
+			c = ships.get(3).getLetter();
+			break;
+		case '4':
+			c = ships.get(4).getLetter();
+			break;
+		case '5':
+			c = ships.get(0).isSunk() ? 'V' : '*';
+			break;
+		case '6':
+			c = ships.get(1).isSunk() ? 'V' : '*';
+			break;
+		case '7':
+			c = ships.get(2).isSunk() ? 'V' : '*';
+			break;
+		case '8':
+			c = ships.get(3).isSunk() ? 'V' : '*';
+		case '9':
+			c = ships.get(4).isSunk() ? 'V' : '*';
+		default:
+			break;
+		}
+		return c;
 	}
 }
