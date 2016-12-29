@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SeaBattle {
 	public static final boolean	CHEAT = false;
-	private static final String VALID_COORD = "([A-J]||[a-j])(1[0-2]|[1-9])";
+	private static final String VALID_COORD = "^[A-J]([1-9]$|10$)";
 	
 	private ArrayList<Player> players;
 	private int turn;
 	private Scanner sc;
 	
+	/**
+	 * Default constructor
+	 */
 	public SeaBattle() {
 		players = new ArrayList<>();
 		turn = 0;
@@ -21,7 +22,7 @@ public class SeaBattle {
 	 * Starts the game
 	 */
 	public void play() {
-		while (true) {
+		while (!players.get(turn).getField().areAllShipsSunk()) {
 			// Who's turn is it
 			System.out.println(String.format("\n*** %s's turn ***", players.get(turn).getName()));
 			
@@ -31,19 +32,25 @@ public class SeaBattle {
 			// Ask for the input
 			String shootInput;
 			do {
-				
 				do {
 					System.out.print(String.format("%s, enter the location to shoot: ", players.get(turn).getName()));
 		 			shootInput = Input.getString(sc);
 				} while (!shootInput.matches(VALID_COORD));
-			} while (!players.get(turn).getField().fire(shootInput));
+			} while (!players.get(turn).getField().fire(shootInput) && !players.get(turn).getField().areAllShipsSunk());
 			
 			// Next turn
-			if (players.size() > 1)
+			if (players.size() > 1 && !players.get(turn).getField().areAllShipsSunk())
 				turn ^= 1;
 		}
+		
+		// Player with current turn won
+		System.out.println("ALL SHIPS SUNK - " + players.get(turn).getName() + " WON!");
 	}
 	
+	/**
+	 * Adds a player to the game
+	 * @param player object
+	 */
 	public void addPlayer(Player player) {
 		players.add(player);
 	}

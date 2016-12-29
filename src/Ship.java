@@ -5,9 +5,17 @@ public class Ship {
 	private int hits;
 	
 	public enum Type {
-		CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, PATROL
+		CARRIER, 
+		BATTLESHIP, 
+		SUBMARINE, 
+		DESTROYER, 
+		PATROL
 	}
 	
+	/**
+	 * Default constructor
+	 * @param type of the ship
+	 */
 	public Ship(Type type) {
 		this.type = type;
 		
@@ -19,19 +27,56 @@ public class Ship {
 		else if (type == Type.PATROL) length = 2;
 	}
 	
+	public void registerHit() {
+		hits++;
+	}
+	
+	/**
+	 * Returns the type of the ship
+	 * @return Ship.Type
+	 */
 	public Type getType() {
 		return type;
 	}
 	
+	/**
+	 * Returns whether the ship has sunk or not
+	 * @return boolean
+	 */
 	public boolean isSunk() {
-		return false;
+		return hits >= length;
 	}
 	
+	/**
+	 * Returns the length of the ship
+	 * @return integer
+	 */
 	public int getLength() {
 		return length;
 	}
 	
+	/**
+	 * Returns the first letter in the type of the ship
+	 * @return char
+	 */
 	public char getLetter() {
 		return type.toString().charAt(0);
+	}
+	
+	public String getFullName() {
+		switch(type) {
+			case CARRIER:
+				return "Aircraft Carrier";
+			case BATTLESHIP:
+				return "Battleship";
+			case SUBMARINE:
+				return "Submarine";
+			case DESTROYER:
+				return "Destroyer";
+			case PATROL:
+				return "Patrol Boat";
+			default:
+				return "Error";
+		}
 	}
 }
