@@ -29,6 +29,8 @@ public class SeaBattle {
 			// Change turns for each game
 			if (players.size() > 1)
 				startTurn ^= 1;
+			else
+				startTurn = 0;
 			turn = startTurn;
 			
 			while (!players.get(turn).getField().areAllShipsSunk()) {
@@ -60,7 +62,7 @@ public class SeaBattle {
 			playing = Input.getYesNo(sc);
 			
 			// Reset players fields
-			for(Player player : players) {
+			for (Player player : players) {
 				player.reset();
 			}
 		}

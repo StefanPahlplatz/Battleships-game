@@ -87,7 +87,14 @@ public class Field {
 	 * @return true if all ships are sunk, otherwise false
 	 */
 	public boolean areAllShipsSunk() {
-		return SeaBattle.CHEAT ? countShipsSunk == 1 : countShipsSunk >= SHIP_AMOUNT;
+		if (SeaBattle.CHEAT) {
+			if (countShipsSunk == 1) {
+				System.out.println("Because cheat mode is on the game end now!");
+				return true;
+			} else 
+				return false;
+		}
+		else return countShipsSunk >= SHIP_AMOUNT;
 	}
 	
 	/**
