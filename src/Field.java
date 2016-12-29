@@ -18,7 +18,7 @@ public class Field {
 		// Fill the board with squares from 1a to 10j
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				board[i][j] = new Square(Integer.toString(i) + alphabet.charAt(j));
+				board[i][j] = new Square(alphabet.charAt(j) + Integer.toString(i + 1)); 	// Increment by 1 to make A1 the bottom row, not A0
 			}
 		}
 		
@@ -76,19 +76,22 @@ public class Field {
 		for (int j = 0; j < BOARD_SIZE; j++) {
 			letters += alphabet.charAt(j) + " ";
 		}
-		System.out.println(letters);
+		System.out.println(letters + "\n");
 	}
 	
 	/**
 	 * Fires at the specified location
 	 * @param atPosition String e.g. 7a
 	 */
-	public void fire(String atPosition) {
+	public boolean fire(String atPosition) {
 		Square s = getCoord(atPosition);
-		if (s != null)
+		if (s != null) {
 			s.shoot();
-		else
+			return true;
+		} else {
 			System.out.println("Wrong coordinate!");
+			return false;
+		}
 	}
 	
 	/**

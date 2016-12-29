@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class SeaBattle {
 	public static final boolean	CHEAT = false;
-	private static final CharSequence VALID_COORD = "([A-J]||[a-j])(1[0-2]|[1-9])";
+	private static final String VALID_COORD = "([A-J]||[a-j])(1[0-2]|[1-9])";
 	
 	private ArrayList<Player> players;
 	private int turn;
@@ -29,10 +29,14 @@ public class SeaBattle {
 			players.get(turn).getField().print();
 			
 			// Ask for the input
-			 Matcher m;
-			 do {
-				 m = Input.getString(sc);
-			 } while (.matches(m, VALID_COORD)
+			String shootInput;
+			do {
+				
+				do {
+					System.out.print(String.format("%s, enter the location to shoot: ", players.get(turn).getName()));
+		 			shootInput = Input.getString(sc);
+				} while (!shootInput.matches(VALID_COORD));
+			} while (!players.get(turn).getField().fire(shootInput));
 			
 			// Next turn
 			if (players.size() > 1)
