@@ -55,7 +55,14 @@ public class SeaBattle {
 			// A player won
 			System.out.print("You sank all ships " + players.get(turn).getName() + 
 					"!\nDo you want to play again? (yes/no): ");
+			
+			// Get input
 			playing = Input.getYesNo(sc);
+			
+			// Reset players fields
+			for(Player player : players) {
+				player.reset();
+			}
 		}
 		System.out.println("Thank you for playing!");
 	}

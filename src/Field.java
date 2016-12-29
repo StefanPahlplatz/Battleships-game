@@ -87,7 +87,7 @@ public class Field {
 	 * @return true if all ships are sunk, otherwise false
 	 */
 	public boolean areAllShipsSunk() {
-		return countShipsSunk >= SHIP_AMOUNT;
+		return SeaBattle.CHEAT ? countShipsSunk == 1 : countShipsSunk >= SHIP_AMOUNT;
 	}
 	
 	/**
