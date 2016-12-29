@@ -38,7 +38,21 @@ public class Field {
 		for (int i = BOARD_SIZE - 1; i >= 0; i--) {
 			String line = String.format("%2s"  + " ", Integer.toString(i + 1)); 
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				line += board[i][j].getLetter() + " ";
+				
+				
+				
+				char c = board[i][j].getLetter();
+				if (c == '0')
+					c = ships.get(0).getLetter();
+				else if (c == '1')
+					c = ships.get(1).getLetter();
+				else if (c == '2')
+					c = ships.get(2).getLetter();
+				else if (c == '3')
+					c = ships.get(3).getLetter();
+				else if (c == '4')
+					c = ships.get(4).getLetter();
+				line += c + " ";
 			}
 			System.out.println(line);
 		}

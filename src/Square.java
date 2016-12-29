@@ -46,30 +46,41 @@ public class Square {
 	 *		otherwise: the letter of the ship at the position
 	 */
 	public char getLetter() {
-		if (ship != null && ship.isSunk()) return 'V';
-		else if (!hasShip() && wasShot) return '~';
+		if (!hasShip() && wasShot) return '~';
 		else if (hasShip() && wasShot) return '*';
-		else if (hasShip() && !wasShot) return ship.getLetter();
+		else if (hasShip() && !wasShot) return Character.forDigit(getShipTypeAsInt(), 10);
 		else return '.';
 	}
 	
+	/**
+	 * Returns the full name of the ship e.g. "Patrol Boat"
+	 * @return String
+	 */
 	public String getShipName() {
 		return ship.getFullName();
 	}
 	
+	/**
+	 * Returns the integer value of the ship enum
+	 * @return integer ranging from 0 to 4, if there is no ship return -1
+	 */
 	public int getShipTypeAsInt() {
-		switch (ship.getType()) {
-		case CARRIER:
-			return 0;
-		case BATTLESHIP:
-			return 1;
-		case SUBMARINE:
-			return 2;
-		case DESTROYER:
-			return 3;
-		case PATROL:
-			return 4;
-		default:
+		if (ship != null) {
+			switch (ship.getType()) {
+				case CARRIER:
+					return 0;
+				case BATTLESHIP:
+					return 1;
+				case SUBMARINE:
+					return 2;
+				case DESTROYER:
+					return 3;
+				case PATROL:
+					return 4;
+				default:
+					return -1;
+			}
+		} else {
 			return -1;
 		}
 	}

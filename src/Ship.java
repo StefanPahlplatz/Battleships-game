@@ -27,6 +27,9 @@ public class Ship {
 		else if (type == Type.PATROL) length = 2;
 	}
 	
+	/**
+	 * Increase the hits of the ship
+	 */
 	public void registerHit() {
 		hits++;
 	}
@@ -56,13 +59,20 @@ public class Ship {
 	}
 	
 	/**
-	 * Returns the first letter in the type of the ship
+	 * Returns the first letter in the type of the ship, return V if it sank
 	 * @return char
 	 */
 	public char getLetter() {
-		return type.toString().charAt(0);
+		if (!isSunk())
+			return type.toString().charAt(0);
+		else
+			return 'V';
 	}
 	
+	/**
+	 * Returns the full name of the ship
+	 * @return String
+	 */
 	public String getFullName() {
 		switch(type) {
 			case CARRIER:
