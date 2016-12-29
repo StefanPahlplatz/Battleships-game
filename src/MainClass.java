@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class MainClass {
 	/**
 	 * Entry point
+	 * @param args starting parameters (leave blank)
 	 */
 	public static void main(String[] args) {
 		SeaBattle seaBattle = new SeaBattle();

@@ -10,7 +10,7 @@ public class Square {
 	
 	/**
 	 * Default constructor
-	 * @param coordinates, e.g. F8
+	 * @param coords e.g. F8
 	 */
 	public Square(String coords) {
 		this.coords = coords;
